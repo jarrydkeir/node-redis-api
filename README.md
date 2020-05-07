@@ -57,6 +57,29 @@ This section covers the API endpoints and their use.
 * /key/:id?removeTTL=true
     - PUT - Remove Time to Live for existing key
 
+* /hash/:id
+    - GET - Retrieves all hashs
+    - DELETE - Deletes all hashs
+
+* /hash/:id
+    - GET - Retrieve value from hash
+    - POST - Create value at hash
+    - PUT - Update value at hash
+    - DELETE - Remove hash
+
+* /hash/:id?rename=:newId
+    - PUT - Rename hash
+
+* /hash/:id?TTL=3600
+    - POST - Create hash with a Time to live of 3600 seconds (1 hour)
+    - PUT - Update a hash with a new Time to live value
+
+* /hash/:id?expireAt=2020-04-05T00:00:00Z
+    - POST - Create hash that expires at 2020-04-05T00:00:00Z
+    - PUT - Update a hash to expire at 2020-04-05T00:00:00Z
+
+* /hash/:id?removeTTL=true
+    - PUT - Remove Time to Live for existing hash
 
 ### TODO - General
 * Think about required response headers
