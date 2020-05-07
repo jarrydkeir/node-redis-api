@@ -2,15 +2,17 @@
 This is a nodejs application that can consume JSON documents to be stored in a standalone redis instance.  
 
 It has the capability to:
-.Create entry
-.Update entry
-.Read entry 
-.Remove entry
+
+.*Create entry
+.*Update entry
+.*Read entry 
+.*Remove entry
 
 ## Required Nodejs Packages
-.redis
-.express
-.bodyparser
+
+.*redis
+.*express
+.*bodyparser
 
 # Quick Setup
 1. pull this repo
