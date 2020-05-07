@@ -30,18 +30,39 @@ Follow these commands to get up and running quickly
 
 > node app.js
 
-# API Endpoints
+# WPI - API Endpoints
 This section covers the API endpoints and their use.
 
+* /keys
+    - GET - Retrieves all keys
+    - DELETE - Deletes all keys
 
-### Coming Soon
+* /keys/:id
+    - GET - Retrieve value from key
+    - POST - Create value at key
+    - PUT - Update value at key
+    - DELETE - Remove key
+
+* /keys/:id?rename=:newId
+    - PUT - Rename key
+
+* /key/:id?TTL=3600
+    - POST - Create key with a Time to live of 3600 seconds (1 hour)
+    - PUT - Update a keys with a new Time to live value
+
+* /key/:id?expireAt=2020-04-05T00:00:00Z
+    - POST - Create key that expires at 2020-04-05T00:00:00Z
+    - PUT - Update a key to expire at 2020-04-05T00:00:00Z
+
+* /key/:id?removeTTL=true
+    - PUT - Remove Time to Live for existing key
 
 
 ### TODO - General
 * Think about required response headers
 * Postman collection
 * Add SSL capability
-* Add Auth methods (OAUTH,Basic) for API
+* Add Auth methods (Basic) for API
 * Add Auth for Mongo
 * add compression for storing in redis
 * force content-type and reject content-types that are not as the as the defined type
@@ -68,3 +89,7 @@ This section covers the API endpoints and their use.
 * HEXISTS
 * HKEYS
 * HDEL
+
+
+
+
