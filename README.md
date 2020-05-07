@@ -57,7 +57,7 @@ This section covers the API endpoints and their use.
 * /key/:id?removeTTL=true
     - PUT - Remove Time to Live for existing key
 
-* /hash/:id
+* /hash
     - GET - Retrieves all hashs
     - DELETE - Deletes all hashs
 
