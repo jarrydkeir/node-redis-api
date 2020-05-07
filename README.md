@@ -1,4 +1,4 @@
-#O verview
+# Overview
 This is a nodejs application that can consume JSON documents to be stored in a standalone redis instance.  
 
 It has the capability to:
