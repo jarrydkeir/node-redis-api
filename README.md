@@ -63,9 +63,9 @@ This section covers the API endpoints and their use.
 * Postman collection
 * Add SSL capability
 * Add Auth methods (Basic) for API
-* Add Auth for Mongo
+* Add Auth for redis
 * add compression for storing in redis
-* force content-type and reject content-types that are not as the as the defined type
+* force content-type and reject content-types that are not as the defined type
 * Finish API doco
 * Error checking
 * pretty error messages
@@ -89,7 +89,3 @@ This section covers the API endpoints and their use.
 * HEXISTS
 * HKEYS
 * HDEL
-
-
-
-
