@@ -35,3 +35,29 @@ This section covers the API endpoints and their use.
 
 
 ### Coming Soon
+
+
+### TODO - General
+* Add SSL capability
+* Add Auth methods (OAUTH,Basic)
+* add compression for storing in redis
+* force content-type and reject content-types that are not json
+* Finish API doco
+* Error checking
+* pretty error messages
+
+
+### TODO - API Endpoints
+* Flushall
+* Exists
+* PEXPIRE
+* PEXPIREAT
+* PERSIST
+* RENAME
+* Search Keys
+* SORT
+* TTL 
+* GETSET - 
+* Hash Get
+* Hash Exists
+* Hash Get all
