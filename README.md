@@ -33,6 +33,8 @@ Follow these commands to get up and running quickly
 # WPI - API Endpoints
 This section covers the API endpoints and their use.
 
+Where ever :id is used it requires a unique key for redis
+
 * /keys
     - GET - Retrieves all keys
     - DELETE - Deletes all keys
