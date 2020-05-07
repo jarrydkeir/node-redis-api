@@ -3,22 +3,32 @@ This is a nodejs application that can consume JSON documents to be stored in a s
 
 It has the capability to:
 
-..*Create entry
-..*Update entry
-..*Read entry 
-..*Remove entry
+* Create entry 
+* Update entry 
+* Read entry 
+* Remove entry 
 
 ## Required Nodejs Packages
 
-..*redis
-..*express
-..*bodyparser
+* redis
+* express
+* bodyparser
+
+>npm install -g redis express bodyparser
 
 # Quick Setup
-1. pull this repo
-2. docker pull redis
-3. docker run -p 6379:6379 redis
-4. node app.js
+
+Follow these commands to get up and running quickly 
+
+(Assumes that docker and node are running on the same host)
+
+> git pull https://github.com/jarrydkeir/node-redis-api.git
+
+> docker pull redis
+
+> docker run -p 6379:6379 redis
+
+> node app.js
 
 # API Endpoints
 This section covers the API endpoints and their use.
