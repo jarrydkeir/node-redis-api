@@ -9,6 +9,8 @@ app.use(bodyParser.json());
 
 ///redis/value grouping
  app.post('/redis/value/:id', function(req, res) {
+     //TODO Compress Json before storing
+     //TODO check content-type reject if not - add content type as const so it can be flexible
     app_redis.set(req.params.id,JSON.stringify(req.body,null,2));
     redis_res = app_redis.get(req.params.id, function (error,result) {
         if (error) {
@@ -21,6 +23,8 @@ app.use(bodyParser.json());
  })
 
  app.get('/redis/value/:id', function(req,res) {
+     //TODO - Check content-type
+
     redis_res = app_redis.exists(req.params.id, function(error, result){
         if (result=='0') {
             res.status(404).send();
@@ -29,10 +33,12 @@ app.use(bodyParser.json());
         redis_res = app_redis.get(req.params.id, function (error,result) {
             if (error) {
                 console.log(error);
-                res.status(500).send(error);
-            }
+                res.status(400).send(error);
+            } if (result !== null){
+                //TODO Move content-type to const
             res.setHeader('Content-Type','application/json');
             res.send(result);
+        }
         });
     }})
     
