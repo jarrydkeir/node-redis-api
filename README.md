@@ -94,6 +94,7 @@ Where ever :id is used it requires a unique key for redis
 * Finish API doco
 * Error checking
 * pretty error messages
+* handle unsupported HTTP methods
 
 
 ### TODO - API Endpoints
