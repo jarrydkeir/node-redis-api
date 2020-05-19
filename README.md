@@ -1,12 +1,6 @@
 # Overview
+
 This is a nodejs application that can consume JSON documents to be stored in a standalone redis instance.  
-
-It has the capability to:
-
-* Create entry 
-* Update entry 
-* Read entry 
-* Remove entry 
 
 ## Required Nodejs Packages
 
@@ -17,79 +11,78 @@ It has the capability to:
 
 >npm install -g redis express bodyparser compression
 
-# Quick Setup
+## Quick Setup
 
 Follow these commands to get up and running quickly 
 
 (Assumes that docker and node are running on the same host)
 
-> git pull https://github.com/jarrydkeir/node-redis-api.git
+> git pull https://github.com/jarrydkeir/node-redis-api.git;
+> docker pull redis;
+> docker run -p 6379:6379 redis;
+> node app.js;
 
-> docker pull redis
+## API Endpoints
 
-> docker run -p 6379:6379 redis
-
-> node app.js
-
-# WPI - API Endpoints
 This section covers the API endpoints and their use.
 
 Where ever :id is used it requires a unique key for redis
 
 * /keys
-    - GET - Retrieves all keys
-    - DELETE - Deletes all keys
-    - PUT - Unsupported HTTP Method
-    - POST - Unsupported HTTP Method
+  * GET - Retrieves all keys
+  * DELETE - Deletes all keys
+  * PUT - Unsupported HTTP Method
+  * POST - Unsupported HTTP Method
 
 * /keys/:id
-    - GET - Retrieve value from key
-    - POST - Create value at key
-    - PUT - Update value at key
-    - DELETE - Remove key
+  * GET - Retrieve value from key
+  * POST - Create value at key
+  * PUT - Update value at key
+  * DELETE - Remove key
 
 * /keys/:id?rename=:newId
-    - PUT - Rename key
-    - GET - Unsupported HTTP Method
-    - POST - Unsupported HTTP Method
-    - DELETE - Unsupported HTTP Method
+  * PUT - Rename key
+  * GET - Unsupported HTTP Method
+  * POST - Unsupported HTTP Method
+  * DELETE - Unsupported HTTP Method
 
 * /key/:id?TTL=3600
-    - POST - Create key with a Time to live of 3600 seconds (1 hour)
-    - PUT - Update a keys with a new Time to live value
+  * POST - Create key with a Time to live of 3600 seconds (1 hour)
+  * PUT - Update a keys with a new Time to live value
 
 * /key/:id?expireAt=2020-04-05T00:00:00Z
-    - POST - Create key that expires at 2020-04-05T00:00:00Z
-    - PUT - Update a key to expire at 2020-04-05T00:00:00Z
+  * POST - Create key that expires at 2020-04-05T00:00:00Z
+  * PUT - Update a key to expire at 2020-04-05T00:00:00Z
 
 * /key/:id?removeTTL=true
-    - PUT - Remove Time to Live for existing key
+  * PUT - Remove Time to Live for existing key
 
 * /hash
-    - GET - Retrieves all hashs
-    - DELETE - Deletes all hashs
+  * GET - Retrieves all hashs
+  * DELETE - Deletes all hashs
 
 * /hash/:id
-    - GET - Retrieve value from hash
-    - POST - Create value at hash
-    - PUT - Update value at hash
-    - DELETE - Remove hash
+  * GET - Retrieve value from hash
+  * POST - Create value at hash
+  * PUT - Update value at hash
+  * DELETE - Remove hash
 
 * /hash/:id?rename=:newId
-    - PUT - Rename hash
+  * PUT - Rename hash
 
 * /hash/:id?TTL=3600
-    - POST - Create hash with a Time to live of 3600 seconds (1 hour)
-    - PUT - Update a hash with a new Time to live value
+  * POST - Create hash with a Time to live of 3600 seconds (1 hour)
+  * PUT - Update a hash with a new Time to live value
 
 * /hash/:id?expireAt=2020-04-05T00:00:00Z
-    - POST - Create hash that expires at 2020-04-05T00:00:00Z
-    - PUT - Update a hash to expire at 2020-04-05T00:00:00Z
+  * POST - Create hash that expires at 2020-04-05T00:00:00Z
+  * PUT - Update a hash to expire at 2020-04-05T00:00:00Z
 
 * /hash/:id?removeTTL=true
-    - PUT - Remove Time to Live for existing hash
+  * PUT - Remove Time to Live for existing hash
 
-### TODO - General
+## TODO - General
+
 * Think about required response headers
 * Postman collection
 * Add SSL capability
@@ -103,8 +96,8 @@ Where ever :id is used it requires a unique key for redis
 * handle unsupported HTTP methods
 * Investigate express.router (see how params work specifically)
 
+## TODO - API Endpoints
 
-### TODO - API Endpoints
 * SETEX - set key with expiry time
 * EXPIRE - set expiry time in secs from now on pre-existing key (PEXPIRE - milliseconds)
 * EXPIREAT - set expiry time - calc secs from today to provided date - validation required for dates that are less than today (PEXIPREAT - milliseconds)
