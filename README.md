@@ -13,8 +13,9 @@ It has the capability to:
 * redis
 * express
 * bodyparser
+* compression
 
->npm install -g redis express bodyparser
+>npm install -g redis express bodyparser compression
 
 # Quick Setup
 
@@ -38,6 +39,8 @@ Where ever :id is used it requires a unique key for redis
 * /keys
     - GET - Retrieves all keys
     - DELETE - Deletes all keys
+    - PUT - Unsupported HTTP Method
+    - POST - Unsupported HTTP Method
 
 * /keys/:id
     - GET - Retrieve value from key
@@ -47,6 +50,9 @@ Where ever :id is used it requires a unique key for redis
 
 * /keys/:id?rename=:newId
     - PUT - Rename key
+    - GET - Unsupported HTTP Method
+    - POST - Unsupported HTTP Method
+    - DELETE - Unsupported HTTP Method
 
 * /key/:id?TTL=3600
     - POST - Create key with a Time to live of 3600 seconds (1 hour)
@@ -95,20 +101,16 @@ Where ever :id is used it requires a unique key for redis
 * Error checking
 * pretty error messages
 * handle unsupported HTTP methods
+* Investigate express.router (see how params work specifically)
 
 
 ### TODO - API Endpoints
-* Flushall - deletes all keys in database - return 204
-* DEL - Delete key - return 204
-* Exists - check if key exists - 200 present - 404 not present
-* Append - update existing key - return 200
 * SETEX - set key with expiry time
 * EXPIRE - set expiry time in secs from now on pre-existing key (PEXPIRE - milliseconds)
 * EXPIREAT - set expiry time - calc secs from today to provided date - validation required for dates that are less than today (PEXIPREAT - milliseconds)
 * PERSIST - remove TTL on key
 * RENAME - rename key
 * Search Keys - search keys same as exists
-* SORT - may not be required
 * TTL - Check TTL on key (secs) - maybe add formatting date.now + time UTC
 * GETSET - provide new data set for key and return old dataset
 * HGET
