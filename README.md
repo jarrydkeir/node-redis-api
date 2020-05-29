@@ -88,12 +88,12 @@ Where ever :id is used it requires a unique key for redis
 * Add SSL capability
 * Add Auth methods (Basic) for API
 * Add Auth for redis
-* add compression for storing in redis
-* force content-type and reject content-types that are not as the defined type
+* ~~add compression for storing in redis~~
+* ~~force content-type and reject content-types that are not as the defined type~~
 * Finish API doco
 * Error checking
-* pretty error messages
-* handle unsupported HTTP methods
+* ~~pretty error messages~~
+* ~~handle unsupported HTTP methods~~
 * Investigate express.router (see how params work specifically)
 
 ## TODO - API Endpoints

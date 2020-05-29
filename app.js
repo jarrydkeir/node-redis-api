@@ -45,50 +45,68 @@ app.put('/keys', function(req,res)
  app.post('/keys/:id', function(req, res) 
  {
     if (req.header("Content-Type") == 'application/json') 
-    {   
-    app_redis.get(req.params.id, function (redisGetError,redisGetResult) {
-        if (redisGetResult == 0) {
-            res.status(400).json({"error":"Key Does Not Exists","details":"The provided Key does not exist, if you want to create this key please use HTTP Method POST"})
-
-        } if (redisGetResult == 1) {
-            app_redis.set(req.params.id,JSON.stringify(req.body,null,2)); // add check to ensure that key has been set
-            redis_res = app_redis.get(req.params.id, function (redisGetError,redisGetResult) {
-                if (redisGetError) {
-                    console.log(redisGetError);
-                    throw redisGetError;
-                }
-                res.status(200).json(JSON.parse(redisGetResult));
-            });
-        }
-    })
-    } else {
-        res.status(415).json({"error":"Media Type Not Supported","details":"Content-Type not supported. Make sure that provided value is JSON and Content-Type is set to application/json"})
+    {
+        app_redis.exists(req.params.id, function(redisExistsError, redisExistsResult){
+            if (redisExistsError)
+            {
+                ///Do something
+            }
+            if (redisExistsResult == 1) {
+                res.status(400).json({"error":"Key Exists","details":"A key / value pair already exists, if you want to update this key please use HTTP Method PUT"})
+            } else {
+                app_redis.set(req.params.id, JSON.stringify(req.body,null,2), function(redisSetError, redisSetResult) {
+                    if(redisSetError){
+                        //do something
+                    }
+                })
+                app_redis.get(req.params.id, function(redisGetError, redisGetResult){
+                    if(redisGetError){
+                        //do something
+                    } else {
+                        res.status(200).json(JSON.parse(redisGetResult))
+                    }
+                })
+            }
+            
+        })
     }
- })
+})
 
- app.put('/keys/:id', function(req, res) 
+ app.put('/keys/:id', function(req,res)
  {
-    if (req.header("Content-Type") == 'application/json') 
-    {   
-    app_redis.get(req.params.id, function (redisGetError,redisGetResult) {
-        if (redisGetResult) {
-            res.status(400).json({"error":"Key Exists","details":"A key / value pair already exists, if you want to update this key please use HTTP Method PUT"})
-
-        } else {
-            app_redis.set(req.params.id,JSON.stringify(req.body,null,2)); // add check to ensure that key has been set
-            redis_res = app_redis.get(req.params.id, function (redisGetError,redisGetResult) {
-                if (redisGetError) {
-                    console.log(redisGetError);
-                    throw redisGetError;
-                }
-                res.status(200).json(JSON.parse(redisGetResult));
-            });
-        }
-    })
-    } else {
-        res.status(415).json({"error":"Media Type Not Supported","details":"Content-Type not supported. Make sure that provided value is JSON and Content-Type is set to application/json"})
-    }
- })
+     let renameVal = req.query.rename;
+     if (req.header('Content-Type') == 'application/json') {
+         app_redis.get(req.params.id, function (redisGetError, redisGetResult)
+         {
+             if (redisGetResult == 0) {
+                 res.status(400).json({"error":"Key does not exists","details":"A key / value pair does not exists, if you want to create this key please use HTTP Method POST"})
+             }
+             if (redisGetResult == 1) {
+                 if (renameVal){
+                     app_redis.rename(req.params.id,renameVal, function(redisRenameError, redisRenameResult){
+                         if (redisRenameError)
+                         {
+                             ///Do something
+                         } else {
+                             res.redirect('/key/'+renameVal,302)
+                         }
+                     })
+                 } else {
+                     app_redis.set(req.params.id,JSON.stringify(req.body,null,2));
+                     app_redis.get(req.params.id, function (redisGetError, redisGetResult){
+                         if (redisGetError) {
+                             throw redisGetError;
+                         } else {
+                             res.status(200).json(JSON.parse(redisGetResult))
+                         }
+                     })
+                 }
+             }
+         })
+     } else {
+         res.status(415).json({"error":"Media Type Not Supported","details":"Content-Type not supported. Make sure that provided value is JSON and Content-Type is set to application/json"})
+     }
+})
 
  app.get('/keys/:id', function(req,res) 
  {
@@ -114,7 +132,7 @@ app.put('/keys', function(req,res)
             });
             }
         })
-    })
+})
 
  app.delete('/keys/:id', function(req,res) {
     if (req.params.id !==null) {
@@ -127,8 +145,9 @@ app.put('/keys', function(req,res)
             if (result=='1') {
                 app_redis.del(req.params.id, function(redisDelKeyError, redisDelKeyResult) {
                     res.status(204).json();
-        }
-        )
+                })
+            }
+        })
     }
 })
 
